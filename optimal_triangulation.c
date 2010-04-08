@@ -30,9 +30,9 @@ double optimal_triangulation(struct Point p[], int n)
 			for(k=i+1;k < j; k++)
 			{
 				double min = a[i][k]+a[k][j];
-				if ( k-i >1)
+				if ( k-i > 1)
 					min += distance(p[i],p[k]);
-				if( j-k>1)
+				if( j-k > 1)
 					min += distance(p[k],p[j]);
 				if(min < a[i][j])
 					a[i][j] = min;

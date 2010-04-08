@@ -2,6 +2,7 @@
 #include <math.h>
 #define MAX_SIZE 100
 
+//define the point set(x,y) coordinate and the angle with respect to the original point
 typedef struct P
 {
     double x;
@@ -14,13 +15,13 @@ Point stack[MAX_SIZE];
 int top=0;
 //void pop();
 //void push();
-//void find_min_y(Point p[], int n);   //找出最右边，且是 y坐标最小的点，这个点存放在p[0]
+//void find_min_y(Point p[], int n);   //p[0]find the minimum y_coordinate point witht most right x_coordinate and store the point in p[0]
 
 //int split(Point p[], int, int);
-//void quicksort(Point, int , int);   //对每个点，相对于p[0]为原点求夹角（这里用cos）升序。
-//void convex(Point p[], int n);
+//void quicksort(Point, int , int);   //sort the ang in every point
+//void convex(Point p[], int n);       //find the convexhull
 
-double dis(Point p1, Point p2)
+double dis(Point p1, Point p2)    //the distance of two point
 {
     return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
 }
@@ -125,7 +126,7 @@ void convex(Point p[], int n)
             pop();
      }
 }
-
+/*
 int main()
 {
     int n;
@@ -145,3 +146,5 @@ int main()
     }
 
 }
+
+*/
