@@ -26,6 +26,21 @@ int split(int a[], int low, int high )
     return i;
 }
 
+
+int find_kth_max_number(int *a, int low ,int high, int k)
+{
+	int m  = split(a, low, high);
+	if ( m - low + 1 == k)
+		return a[m];
+	else
+	{
+		if(m - low + 1 > k)
+			find_kth_max_number(a, low, m, k);
+		else
+			find_kth_max_number(a, m+1, high, k-(m - low + 1) );	
+	}
+}
+
 void quicksort(int a[] ,int low,int high)
 {
      if(low<high)
@@ -39,12 +54,13 @@ void quicksort(int a[] ,int low,int high)
 int main()
 {
     int a[]= {2,6,3,5,1,10,4,9};
+    int k = find_kth_max_number(a, 0, 7,8);
+    printf("%d\n", k);
     quicksort(a,0,7);
     int i;
     for( i=0 ;i<=7;i++)
-         printf("%d ",a[i]);
-    printf("\n");
+    	   printf("%d ",a[i]);
     
-    system("pause");
+    printf("\n");
     return 0;
 } 
