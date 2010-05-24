@@ -100,7 +100,6 @@ void *memcpy(void *dst, const void *src, size_t count)
 		dst = (char *)dst + 1;
 		src = (char *)src + 1;
 	}
-	
 	return ret
 }
 
@@ -131,5 +130,63 @@ void *memmove(void *dst, const void *src, size_t count)
 	}
 	return ret;
 }
+/******************************************************************/
+
+char* __strncpy(char *dst, const char *src, size_t n)
+{
+	char c;
+	char *s = dst;
+	if ( n >= 4 )
+	{
+		size_t n4 = n >> 2;
+		for(::)
+		{
+			c = *src++;
+			*dst++;
+			if(c == '\0')
+				break;
+				
+			c = *src++;
+			*dst++;
+			if(c == '\0')
+				break;
+				
+			c = *src++;
+			*dst++;
+			if(c == '\0')
+				break;
+				
+			c = *src++;
+			*dst++;
+			if(c == '\0')
+				break;
+				
+			if(--n4 == 0)
+				goto last_chars;
+		}
+		n -= dst - s;
+		goto zero_fill;
+	}
 	
+	last_ chars:
+		n &= 3;
+		if( n == 0)
+			return dst;
+		for(::)
+		{
+			c = *src++;
+			n--;
+			if(c == '\0')
+				break;
+			if(n == 0)
+				return dst;
+		}
+	zero_fill:
+		while(n-- > 0)
+			dst[n] = '\0';
+		return dst-1;
+}
+		
+				
+
 
