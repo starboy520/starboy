@@ -1,20 +1,20 @@
 #include <stdio.h>
 /**********************************************88
 
-背包问题的核心思想
+main construction
       a[i][j] = a[i-1][j]   if j< cube[i]
       a[i][j] = max(a[i][j],a[i-1][j-1]+value[i])  j>=cube[i]
 **************************************************************/
 
 void knapsack(int **a, int *cube, int *value, int capacity, int n)
 {
-    /********
-             a[][] 为求这个背包最优解值
+/********
+         a[][] 为求这个背包最优解值
             cube[] 是体积
             value[] 为每个的价值,
             capacity 为背包的最大容量
             n 为物体的总个数
-   ********/
+********/
 
     int i,j;
     for(i=0; i<=n;i++)
