@@ -40,9 +40,7 @@ void permutation2(int a[],int m,int n)  //每次排列对把 m放置于第 i 个
      {
              int j;
              for(j=1;j<=n;j++)
-             {
                               printf("%d",a[j]);
-             }
              printf("\n");
      }
      int i;
