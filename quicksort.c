@@ -1,23 +1,20 @@
 #include <stdio.h>
 
-int split(int a[], int low, int high )
-{
+int split(int a[], int low, int high ){
     int i,j,x;
     i=low;
     x = a[low];
     for(j=low+1;j<=high;j++)
     {
-                            if(a[j] <= x)
-                            {
-                                    i++;
-                                    if( i != j)
-                                    {
-                                        int temp;
-                                        temp = a[i];
-                                        a[i] = a[j];
-                                        a[j] = temp;
-                                    }
-                            }
+        if(a[j] <= x){
+            i++;
+            if( i != j) {
+                int temp;
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
     }
     int tp1 = a[low];
     a[low] = a[i];
