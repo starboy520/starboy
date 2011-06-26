@@ -11,10 +11,10 @@ int josephus(int n, int m) {
     for (i = 2; i <= n; i++)
         s = (s+m)%i;
 
-    return s;
+    return s+1;
 }
 
 int main() {
-
     pritf("%d\n", josephus( 10, 3));
-
+    return 0;
+}
