@@ -10,8 +10,7 @@
 
 */
 
-int MERGE(int a[], int begin1,int end1,int end2)
-{
+int MERGE(int a[], int begin1,int end1,int end2) {
 	 int num = 0;
 	 int b1,b2,b3,i;
 	 int *c;
@@ -20,24 +19,18 @@ int MERGE(int a[], int begin1,int end1,int end2)
      b2 = end1+1;
      b3 = end2;
      int k=0;
-     while(b1 <= end1 && b2 <= end2)
-     {
-              if(a[b1] <= a[b2])
-                       c[k++] = a[b1++];
-              else
-              {
-              		   num += end1-b1+1;
-                       c[k++] = a[b2++];
-              }
+     while (b1 <= end1 && b2 <= end2) {
+         if(a[b1] <= a[b2])
+             c[k++] = a[b1++];
+         else {
+             num += end1-b1+1;
+             c[k++] = a[b2++];
+         }
      }
-     
-     if(b1 == end1+1)
-      {     
+     if (b1 == end1+1) {     
             for(i = b2; i <= end2; i++)
                  c[k++] = a[i];
-      }
-      else
-      {
+      } else {
           for(i = b1; i <= end1; i++)
                 c[k++] = a[i];
       }
@@ -48,28 +41,20 @@ int MERGE(int a[], int begin1,int end1,int end2)
       return num;
 }
 
-int merge_sort(int *a,int low, int high)
-{
+int merge_sort (int *a,int low, int high) {
 	if(low == high)
 		return 0;
-	else if(low<high)
-	{
-		
+	else if(low<high) {
 		int mid = (high+low)/2;
 		int num1 = merge_sort(a,low,mid);
 		int num2 = merge_sort(a,mid+1, high);
 		return num1+num2+MERGE(a, low, mid, high);
 	}
 }
-            
-            
-int main()
-{
+
+int main() {
     int a[10] = {'a','b','c','A','B','C'};
     int k = merge_sort(a,0,5);
     printf("%d\n", k);
-    
-    
     return 0;
 }
-                    

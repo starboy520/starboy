@@ -10,19 +10,17 @@ void permutation1(int a[],int low ,int high)
 {
 	int i ,temp;
 	
-	if(low>high)
-	{
+	if (low>high) {
 		for(i =0;i<=high;i++)
 			printf("%d ",a[i]);
 		printf("\n");
 	}
-	for( i = low ;i <= high ; i++)
-	{
+	for (i=low ; i<=high; i++) {
 		temp=a[low];
 		a[low] = a[i];
 		a[i] =  temp;
 
-		permutation1( a ,low+1,high);
+		permutation1(a ,low+1,high);
 
 		a[i] = a[low];   /*要交换回来  */
 		a[low] = temp;
@@ -60,11 +58,11 @@ void permutation2(int a[],int m,int n)  //每次排列对把 m放置于第 i 个
 
 int main()
 {
-	int a[] = {1,2,3};
+	int a[] = {1,2,3, 5, 6};
 	int b[4] = {0};
 	int n=3;
 	m=3;
-	permutation1(a,0,2);
+	permutation1(a,0,4);
 	permutation2(b,3,3);
 	return 0;
 }
