@@ -12,8 +12,9 @@ void permutation1(int a[],int low ,int high)
 	
 	if (low == high) {
         all++;
-		for(i =0;i<=high;i++)
+		for (i =0; i <= high; i++) {
 			printf("%d ",a[i]);
+        }
 		printf("\n");
 	} else {
         for (i=low ; i<=high; i++) {
