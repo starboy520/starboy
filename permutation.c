@@ -5,26 +5,28 @@
    接下来生成1，3，4，，，，n的所以排列，在每个排列前加上2，重复这样的过程，最后得到结果。
    注意：在递归调用时进行了交换，递归调用后要换回来。 
   */
-
+static int all = 0;
 void permutation1(int a[],int low ,int high)
 {
 	int i ,temp;
 	
-	if (low>high) {
+	if (low == high) {
+        all++;
 		for(i =0;i<=high;i++)
 			printf("%d ",a[i]);
 		printf("\n");
-	}
-	for (i=low ; i<=high; i++) {
-		temp=a[low];
-		a[low] = a[i];
-		a[i] =  temp;
+	} else {
+        for (i=low ; i<=high; i++) {
+		    temp=a[low];
+		    a[low] = a[i];
+		    a[i] =  temp;
 
-		permutation1(a ,low+1,high);
+		    permutation1(a ,low+1,high);
 
-		a[i] = a[low];   /*要交换回来  */
-		a[low] = temp;
-	}
+		    a[i] = a[low];   /*要交换回来  */
+		    a[low] = temp;
+	    }
+    }
 }
 
 /*第二种算法
@@ -64,5 +66,6 @@ int main()
 	m=3;
 	permutation1(a,0,4);
 	permutation2(b,3,3);
+    printf("all : %d\n", all); 
 	return 0;
 }
