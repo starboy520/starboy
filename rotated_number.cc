@@ -1,7 +1,9 @@
 #include <iostream>
-using std::endl;
-using std::cout;
 #include <climits>
+using namespace std;
+int noReset = INT_MAX;
+
+
 // Given a sorted array, which can be rotated,
 // such as [4,5,6,7,8,1,2,3]
 // find the minimum numbers.which is called a reset point.
@@ -10,13 +12,9 @@ using std::cout;
 // So we need to use binary search which will give
 // a O(logn) algorithm
 
-
-int noReset = INT_MAX;
-
-
 // In this program, I assume all numbers in the array are different.
-//
 // But if there is the same numbers in this array ? such as 
+// 2,3,3,4,1,1,2 how to do it?
 int minNumInRotatedArrya(int *a, int begin, int end) {
     // If the array are sorted or there are only 1 or 2 element,
     // then there is no reset point.
@@ -24,12 +22,9 @@ int minNumInRotatedArrya(int *a, int begin, int end) {
         return INT_MAX;
 
     while (begin <= end) {
-        // there are left one or two element,
+        // there are left  two element,
         // such as 3,1, then will return 1;
         // this can happen when array such as 2,3,4,1,5
-        // if (end == begin)
-        //    return a[end];
-
         if (end - begin == 1) {
             return a[begin] < a[end] ? a[begin] : a[end];
         }
@@ -46,6 +41,41 @@ int minNumInRotatedArrya(int *a, int begin, int end) {
             end = mid-1;
     }
 }
+
+
+// Another problem.
+// How to search a num in this kind of array?
+// For binary search, we need to track begin, end, mid element
+// there are 4 kind of possiblities:
+// begin < mid && mid < end : in this way, the array must be in a sorted status
+// begin < mid && mid > end :
+// begin > mid && mid > end : this will not happen, decreased sorted status
+// begin > mid && mid < end :
+// so, Now we can use binary search to solve this problem
+int search(int value, int *a, int begin, int end) {
+    while (begin <= end) {
+        int mid = begin + (end - begin)/2;
+        if (value == a[mid])
+            return mid;
+        else if (a[begin] < a[mid]) {  // from begin to mid this is a increasing order
+            if( a[begin] <= value && value < a[mid]) {
+                end = mid - 1;
+            } else {
+                begin = mid + 1;
+            }
+        } else {  // from the mid to end is an increasing order
+            if (a[mid] <= value && value <= a[end]) {
+                begin = mid +1;
+            } else {
+                end = mid -1;
+            }
+        }
+    }
+
+    return INT_MAX;
+}
+
+
 
 void print (int *a, int begin, int end) {
     int reset = minNumInRotatedArrya(a, begin, end);
@@ -76,5 +106,10 @@ void test() {
 
 int main() {
     test();
+    int a[10] = {6,7,8,9,0,1,2,3,4,5};
+    int x = search(6, a, 0, 9);
+    cout << x <<endl;
+    return 0;
+
 }
 
