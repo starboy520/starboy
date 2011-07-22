@@ -3,26 +3,24 @@
 
 int candidate(int a [] ,int n)
 {
-    int count = 1 ;
+    int count = 1;
     int i;
     int c = a[0];
     for(i=2;i<n;i++)
     {
-                    if (count == 0)
-                       c = a[i];
-                    else
-                    {
-                        if(c=a[i])
-                                  count++;
-                        else
-                                  count--;
-                    }
+      if (count == 0)
+        c = a[i];
+      else {
+        if(c=a[i])
+          count++;
+        else
+          count--;
+      }
     }
     if(count >0)
-             return c;
+      return c;
     else
-             return MIN;
-    
+      return MIN;
 }
 
 int main()
@@ -32,16 +30,14 @@ int main()
     c = candidate(a,11);
     int i;
     int count = 0;
-    for(i=0;i<11;i++)
-    {
-                     if(c==a[i])
-                                count++;
+    for(i=0;i<11;i++) {
+      if(c==a[i])
+        count++;
     }
     if(count> 11/2)
-              printf("%d\n",c);
+      printf("%d\n",c);
     else
-              printf("NONE\n");
-    system("pause");
+      printf("NONE\n");
 }
                      
                        

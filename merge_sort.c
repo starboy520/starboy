@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <malloc.h>
 
-/* 1: implement the mergesort
-   2: Inverse number of algorithms (逆序数算法)
-   
-    what is inversion ?:   i<j but a[i]>a[j] then (i,j) is a pair of inversion
-    
-    we find when we do merge_sort ,  if i<j but a[i]>a[j], then we need to swap a[i],a[j], so ,once we do a swap , we find a pair of inversion.
+// 1: implement the mergesort
+// 2: Inverse number of algorithms (逆序数算法)
+//
+//    what is inversion ?:   i<j but a[i]>a[j] then (i,j) is a pair of inversion
+//    we find when we do merge_sort ,  if i<j but a[i]>a[j],
+//    then we need to swap a[i],a[j], so ,once we do a swap , we find a pair of inversion.
 
-*/
 
 int MERGE(int a[], int begin1,int end1,int end2) {
 	 int num = 0;

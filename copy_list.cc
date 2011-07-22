@@ -7,16 +7,16 @@ struct node {
     node *another;
 };
 
-
-//一个链表有next 和another 指针, 复制一个一模一样的，时复杂度为O(n)
-//空间复杂度为o(1)
+// There is one list who has a pointer next and another,
+// please copy one with exact of this, with time complexcity O(n)
+// space O(1)
 
 node* copy(node* head) {
     if (head == 0)
         return 0;
     node* current = head;
     while (current != NULL) {
-        node* next= current->next;
+        node* next1= current->next;
 
         node* tmp = new node;
         tmp->next = NULL;
@@ -25,14 +25,14 @@ node* copy(node* head) {
         tmp->next= current->next;
         current->next = tmp;
         
-        current = next;
+        current = next1;
     }
 
     current = head;
     while (current != NULL) {
         node* copying = current->next;
         copying->data = current->data;
-        if (current->another != NULL)
+      if (current->another != NULL)
             copying->another =current->another->next;
 
         current = current->next->next;
