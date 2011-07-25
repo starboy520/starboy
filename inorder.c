@@ -25,7 +25,7 @@ void InOrderTraverse(Btree *root)
 {
     Btree *p = root;
     top++;
-    while( p != NULL && top != 0)
+    while( p != NULL || top != 0)
     {
         while( p != NULL )
         {
