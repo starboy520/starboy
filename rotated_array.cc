@@ -1,8 +1,32 @@
 #include <iostream>
 #include <climits>
+#include <cassert>
 using namespace std;
 int noReset = INT_MAX;
 
+// this is a more effient binary search
+// we assume begin = -1 and end = n;
+
+int binarysearch(int *a, int begin, int end, int x) {
+  int b = begin;
+  int e = end;
+  while (begin + 1 != end) {
+    int mid = begin + (end - begin) / 2;
+    if (a[mid] <= x) {
+      begin = mid;
+    } else {
+      end = mid;
+    }
+  }
+
+  assert(begin + 1 == end && a[begin] <= x && a[end] > x);
+  
+  int p = begin;
+  if (p <= b || a[p] != x) {
+    p = -1;
+  }
+  return p;
+}
 
 // Given a sorted array, which can be rotated,
 // such as [4,5,6,7,8,1,2,3]
@@ -48,7 +72,7 @@ int minNumInRotatedArrya(int *a, int begin, int end) {
 // For binary search, we need to track begin, end, mid element
 // there are 4 kind of possiblities:
 // begin < mid && mid < end : in this way, the array must be in a sorted status
-// begin < mid && mid > end :
+// begin < mid && mid > end : 
 // begin > mid && mid > end : this will not happen, decreased sorted status
 // begin > mid && mid < end :
 // so, Now we can use binary search to solve this problem
@@ -105,10 +129,13 @@ void test() {
 
 
 int main() {
-    test();
-    int a[10] = {6,7,8,9,0,1,2,3,4,5};
-    int x = search(6, a, 0, 9);
-    cout << x <<endl;
+    //test();
+    //int a[10] = {6,7,8,9,0,1,2,3,4,5};
+    //int x = search(6, a, 0, 9);
+    //cout << x <<endl;
+
+    int b[10] = {2,3,4,4,4,4,4,4,5,6};
+    cout << binarysearch(b, -1, 10, 4) << endl;
     return 0;
 
 }
