@@ -73,9 +73,51 @@ public class MinNum {
     return -1234;
   }
   
+  public static void reshuffle(int[] a) {
+    int begin = 0;
+    int end = a.length-1;
+    int temp;
+    while (begin < end) {
+      while (a[begin]%2 == 1) {
+        begin++;
+      }
+      while (a[end]%2 == 0) {
+        end--;
+      }
+
+      temp = a[begin];
+      a[begin] = a[end];
+      a[end] = temp;
+      begin++;
+      end--;
+    }
+  }
+  
+  public static void permu(int[] a, int[] output, int index) {
+    if (index == output.length) {
+      for (int i = 0; i < output.length; i++) {
+        System.out.print(output[i]);
+      }
+      System.out.println();
+    } else {
+      for (int i = 0; i < a.length; i++) {
+        output[index] = a[i];
+        permu(a, output, index+1);
+      }
+    }
+  }
   
   public static void main(String[] args) {
-    int[] a = {0,1};
-    System.out.println(minGreateThanK(a, 21));
+    //int[] a = {0,1};
+    //System.out.println(minGreateThanK(a, 21));
+    
+    //int[] b = { 12, 4,2,12,3,455,3212};
+    //reshuffle(b);
+    //for (int i = 0; i < b.length; i++)
+    //  System.out.println(b[i]);
+    
+    int[] a = {1,2};
+    int[] output = new int[3];
+    permu(a, output, 0);
   }
 }
