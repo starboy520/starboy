@@ -1,3 +1,5 @@
+// wrong code
+
 #include <stdio.h>
 #define MIN -1000
 
