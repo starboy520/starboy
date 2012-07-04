@@ -8,13 +8,20 @@
 First record samples until you have filled the reservoir(K samples).
 Once you have the first K samples the probability of each sample being in the final result was K/K or 100%.
 
-Now when the K+i sample appears the probability of the new sample appearing in one _PARTICULAR_ output slot becomes 1/K+i. Since there are K potential output slots there is K/(K+i) chance of it being in the output and i/(K+i) chance that it wont be.
+Now when the K+i sample appears the probability of the new sample appearing in one _PARTICULAR_ output slot becomes 1/K+i.
+Since there are K potential output slots there is K/(K+i) chance of it being in the output and i/(K+i) chance that it wont be.
 
-So choosing whether or not to add the new sample is easy we toss the dice. If we decide that the new sample is in the output then one of the existing items needs to be removed. Since all the items that where added to output and have equal chance of being present they also have equal chance of being removed. Hence we can simply choose to remove one of the existing samples with a 1/K probability. 
+So choosing whether or not to add the new sample is easy we toss the dice.
+If we decide that the new sample is in the output then one of the existing items needs to be removed.
+Since all the items that where added to output and have equal chance of being present they also have equal chance of being removed.
+Hence we can simply choose to remove one of the existing samples with a 1/K probability. 
 
 This make sense logically but how do we prove it. 
+PROOF:
+
 Assuming the prior stage worked correctly each element in the output should have K/(K+i-1) chance of being present.
-There is i/(K+i) chance that prior output will be unchanged this round. Hence each element has Ki/(K+i)(K+i-1) chance of being output if the unchanging choice is made for this stage.
+There is i/(K+i) chance that prior output will be unchanged this round.
+Hence each element has Ki/(K+i)(K+i-1) chance of being output if the unchanging choice is made for this stage.
 There is K/(K+i) chance that this something in the output will change
 And for each element there is (K-1)/K chance it will not be replaced thus a total of (K-1)/K * K/(K+i) * K/(K+i-1) chance it will not be removed.
 So conversely there is a 1/K * K/(K+i) * K/(K+i-1) chance that it will be replaced.
