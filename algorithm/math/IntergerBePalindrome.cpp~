@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+bool Palindrome(int num) {
+  if (num < 0) {
+    return false;
+  }
+
+  int i = 1;
+  int temp = num;
+  while (temp / 10 != 0) {
+    temp = temp / 10;
+    i *= 10;
+  }
+
+  if (num < 10) {
+    return true;
+  }
+
+  while (num >= 10) {
+    int higher = num / i;
+    num = num / i;
+    int lower = num % 10;
+    num = num/10;
+
+    if (higher != lower) {
+      return false;
+    }
+
+    i = i / 100;
+  }
+
+  return true;
+}
+
+
+int main() {
+  if (Palindrome(2147447412) == true) {
+    cout <<"true" << endl;
+  } else {
+    cout <<"false" << endl;
+  }
+  return 0;
+}

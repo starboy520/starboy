@@ -1,0 +1,95 @@
+class ThreadManager {
+private
+  ThreadPool* m_pool;
+  int m_threadnum;
+
+public:
+  ThreadManager() {
+    m_threadnum = 10;
+    m_pool = new ThreadPool(m_threadnum);
+  }
+  ThreadManager(int num) {
+    m_threadnum = num;
+    m_pool = new ThreadPool(m_threadnum);
+  }
+
+  virtual ~ThreadManager() {
+    if (NULL != m_pool) {
+      delete m_pool;
+    }
+  }
+  void SetParallelNum(int num) {
+    m_threadnum = num;
+  }
+  void Run(Job* job, void jobdata) {
+    m_pool->Run(job, jobdata);
+  }
+
+  void TerminateAll(void) {
+    m_pool->TerminateAll();
+  }
+
+};
+
+class CThread {
+private:
+  int m_errCode;
+  Semphore m_ThreadSemaphore;
+  unsigned long m_threadId;
+  bool m_Detach;
+  bool m_CreateSuspended;
+  char m_threadName[20];
+  ThreadState m_ThreadState;
+
+protected:
+  void SetErrCode(int errcode) {
+    m_errCode = errcode;
+  }
+
+  static void ThreadFunction(void*) {
+  }
+
+public:
+  CThread();
+  CThread(bool createSuspended, bool detach);
+  virtual void Run(void) = 0;
+  void SetThread(ThreadState state) {
+    m_ThreadState = state;
+  }
+
+  bool Terminate(void);
+  bool Start(void);
+  bool Exit(void);
+  bool Wakeup(void);
+
+  ThreadState GetThreadState(void) {
+    return m_ThreadState;
+  }
+
+  int GetLastError(void) {
+    return m_errCode;
+  }
+
+  void SetThreadName(const char* name) {
+    strcpy(m_threadName, name);
+  }
+
+  char* getThreadName(void) {
+    return m_threadName;
+  }
+
+  int GetThreadId(void) {
+    return m_threadId;
+  }
+
+  bool SetPriority(int priority);
+  int GetPriority(void);
+  int GetCocurrency(void);
+  void SetCocurency(int num);
+  bool Detach(void);
+  bool Join(void);
+  bool Yeild(void);
+  int Self(void);
+};
+
+
