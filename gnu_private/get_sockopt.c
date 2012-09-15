@@ -36,6 +36,5 @@ int main(int argc, char* argv[]) {
   getsockopt(sock_fd, IPPROTO_TCP, TCP_MAXSEG, &mss, &len);
   printf("defaults, SO_RCVBUF=%d, TCP_MAXSEG=%d\n", rcvbuf, mss);
   return 0;
-  return 0;
 
 }
