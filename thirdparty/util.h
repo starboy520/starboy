@@ -1,3 +1,4 @@
+namespace starboy {
 namespace utils {
 
 inline uint16_t swap_16(uint16_t x) {
@@ -15,3 +16,11 @@ inline uint64_t swap_64(uint64_t x) {
     return (x >> 32) | (x <<32);
 }
 
+uint32_t address_hash(const char* adr) {
+    register uint32_t key;
+    key = (uint32_t) adr;
+
+    return (key >> 3) * 2654435761;
+}
+}  // namespace utils
+}  // namespace starboy
