@@ -9,6 +9,7 @@
 //
 //C(N,m) = C(N,m - 1) + C(N - Sm,m)
 //
+//
 #include <iostream>
 using namespace std;
 int count(int*s, int m, int n) {
