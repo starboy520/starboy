@@ -1,6 +1,7 @@
 #include <cstdlib>
+#include <cassert>
+#include <time.h>
 #include <stdio.h>
-#include <assert.h>
 #include <stdint.h>
 #include <new>
 
@@ -67,10 +68,11 @@ template <typename Key, typename Comparator>
 struct SkipList<Key, Comparator>::Node {
 	const Key key;
 	// tricky here!
-	Node* next_[1];
+	// Node* next_[kMaxHeight];
+	Node** next_;
 
-	explicit Node(const Key& k) : key(k) {
-
+	explicit Node(const Key& k, int height) : key(k) {
+		next_ = new Node*[height];
 	}
 
 	void SetNext(int n, Node* x) {
@@ -84,9 +86,9 @@ struct SkipList<Key, Comparator>::Node {
 };
 
 template<typename Key, typename Comparator>
-typename SkipList<Key, Comparator>::Node* SkipList<Key, Comparator>::NewNode(const Key& key, int height) {
-	char* mem = (char*)malloc(sizeof(Node) + sizeof(Node) * (height -1));
-	return new (mem) Node(key);
+typename SkipList<Key, Comparator>::Node*
+SkipList<Key, Comparator>::NewNode(const Key& key, int height) {
+	return new Node(key, height);
 }
 
 template <typename Key, typename Comparator>
@@ -94,7 +96,7 @@ int SkipList<Key, Comparator>::Randomheight() {
 	static const uint32_t kBranching = 4;
 	int height = 1;
 
-	while (height < kMaxHeight && (rand() % kBranching) == 0) {
+	while (height <= kMaxHeight && (rand() % kBranching) == 0) {
 		height++;
 	}
 
@@ -114,7 +116,7 @@ typename SkipList<Key, Comparator>::Node* SkipList<Key, Comparator>::FindGreater
 	int level = GetMaxHeight() - 1;
 	while (true) {
 		Node* next = x->Next(level);
-		if (KeyAfterNode(key, x)) {
+		if (KeyAfterNode(key, next)) {
 			x = next;
 		} else {
 			if (prev != NULL) {
@@ -169,6 +171,7 @@ typename SkipList<Key, Comparator>::Node* SkipList<Key, Comparator>::FindLast() 
 
 template <typename Key, typename Comparator>
 SkipList<Key, Comparator>::SkipList(Comparator cmp) : compare_(cmp), head_(NewNode(0, kMaxHeight)), max_height_(1) {
+	srand(time(NULL));
 	for (int i = 0; i < kMaxHeight; i++) {
 		head_->SetNext(i, NULL);
 	}
@@ -182,7 +185,7 @@ void SkipList<Key, Comparator>::Insert(const Key& key) {
 	assert(x == NULL || !Equal(key, x->key));
 
 	int height = Randomheight();
-	if (height > GetMaxHeight) {
+	if (height > GetMaxHeight()) {
 		for (int i = GetMaxHeight(); i < height; i++) {
 			prev[i] = head_;
 		}
@@ -227,5 +230,15 @@ struct Comparator {
 int main() {
 	Comparator cmp;
 	SkipList<Key, Comparator> list(cmp);
+	for (int i = 0; i < 100; i++) {
+		list.Insert(i);
+	}
 
+	for (int i = 0; i < 100; i++) {
+		if (list.Contains(i)) {
+			printf("yes\n");
+		}
+	}
+
+	return 0;
 }
