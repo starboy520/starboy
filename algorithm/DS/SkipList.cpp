@@ -1,8 +1,8 @@
 #include <cstdlib>
 #include <cassert>
-#include <stdint.h>
 #include <time.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <new>
 
 template <class Key, class Comparator>
@@ -11,14 +11,14 @@ private:
 	struct Node;
 public:
 	explicit SkipList(Comparator cmp);
-	
+
 	void Insert(const Key& key);
 
 	// Return true iff an entry that compares equals to key is in the list
 	bool Contains(const Key& key) const;
 
 private:
-	enum { kMaxHeight = 12};
+	enum {kMaxHeight = 12};
 
 	const Comparator compare_;
 
@@ -51,7 +51,7 @@ private:
 
 	// Return the latest node with a node.key < key
 	Node* FindLessThan(const Key& key) const;
-	
+
 	// return the last node in the list
 	// return head_ if list is empty
 	Node* FindLast() const;
@@ -61,7 +61,7 @@ private:
 	void operator=(const SkipList&);
 };
 
-// details 
+// details
 //
 // about Node
 template <typename Key, typename Comparator>
@@ -69,9 +69,10 @@ struct SkipList<Key, Comparator>::Node {
 	const Key key;
 	// tricky here!
 	// Node* next_[kMaxHeight];
-	Node* next_[kMaxHeight];
+	Node** next_;
 
-	explicit Node(const Key& k) : key(k) {
+	explicit Node(const Key& k, int height) : key(k) {
+		next_ = new Node*[height];
 	}
 
 	void SetNext(int n, Node* x) {
@@ -87,7 +88,7 @@ struct SkipList<Key, Comparator>::Node {
 template<typename Key, typename Comparator>
 typename SkipList<Key, Comparator>::Node*
 SkipList<Key, Comparator>::NewNode(const Key& key, int height) {
-	return new Node(key);
+	return new Node(key, height);
 }
 
 template <typename Key, typename Comparator>
@@ -179,7 +180,8 @@ SkipList<Key, Comparator>::SkipList(Comparator cmp) : compare_(cmp), head_(NewNo
 template <typename Key, typename Comparator>
 void SkipList<Key, Comparator>::Insert(const Key& key) {
 	Node* prev[kMaxHeight];
-	Node* x = FindGreaterOrEqual(key, prev);
+	Node* x= FindGreaterOrEqual(key, prev);
+
 	assert(x == NULL || !Equal(key, x->key));
 
 	int height = Randomheight();
