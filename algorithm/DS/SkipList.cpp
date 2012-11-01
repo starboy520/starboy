@@ -17,6 +17,8 @@ public:
 	// Return true iff an entry that compares equals to key is in the list
 	bool Contains(const Key& key) const;
 
+	bool Delete(const Key& key);
+
 private:
 	enum {kMaxHeight = 12};
 
@@ -178,6 +180,11 @@ SkipList<Key, Comparator>::SkipList(Comparator cmp) : compare_(cmp), head_(NewNo
 }
 
 template <typename Key, typename Comparator>
+bool SkipList<Key, Comparator>::Delete(const Key& key) {
+
+}
+
+template <typename Key, typename Comparator>
 void SkipList<Key, Comparator>::Insert(const Key& key) {
 	Node* prev[kMaxHeight];
 	Node* x= FindGreaterOrEqual(key, prev);
@@ -208,8 +215,6 @@ bool SkipList<Key, Comparator>::Contains(const Key& key) const {
 		return false;
 	}
 }
-
-
 
 //////////////// test /////////////////////////
 
