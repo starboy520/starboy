@@ -31,14 +31,16 @@ public class Subset {
 			allsubset.add(new ArrayList<Integer>());
 		} else {
 			List< List<Integer> > currentSubset = getSubset(set, index+1);
+			int item = set.get(index);
+			ArrayList<ArrayList<Integer>> moresubsets = new ArrayList<ArrayList<Integer>>();
 			for (List<Integer> oneset : currentSubset) {
 				List<Integer> thisset = new ArrayList<Integer>();
 				int num = set.get(index);
 				thisset.addAll(oneset);
 				thisset.add(num);
-				allsubset.add(thisset);
+				moresubsets.add(thisset);
 			}
-			allsubset.addAll(currentSubset);
+			allsubset.addAll(moresubsets);
 		}
 		
 		return allsubset;

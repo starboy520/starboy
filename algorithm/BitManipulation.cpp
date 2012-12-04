@@ -116,6 +116,7 @@ bool next_permutation(It begin, It end) {
 
 	while (true) {
 		It j = i;
+		i--;
 		if (*i < *j) {
 			It k =end;
 			while (!(*i < *--k)) {
