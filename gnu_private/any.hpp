@@ -81,3 +81,9 @@ ValueType* any_cast(any* operand) {
   return operand && operand->type() == typeid(ValueType) ?
       &static_cast<any::holder<ValueType>*>(operand->content)->held :0;
 }
+
+template <typename ValueType>
+inline const ValueType* any_cast(const any* operand) {
+  return any_cast<ValueType>(const_cast<any*>(operand));
+}
+
