@@ -1,5 +1,3 @@
-
-
 public class Kmp {
   public static void print_matrix(int[][] a , int m, int n) {
     int x = 0;
