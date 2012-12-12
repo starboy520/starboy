@@ -49,4 +49,5 @@ public class Kmp {
     print_matrix(a, 3, 3);
     
   }
+	// ugly
 }
