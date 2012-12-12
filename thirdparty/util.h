@@ -22,5 +22,6 @@ uint32_t address_hash(const char* adr) {
 
     return (key >> 3) * 2654435761;
 }
+
 }  // namespace utils
 }  // namespace starboy
