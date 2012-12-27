@@ -32,7 +32,6 @@ class Solution {
 	vector< vector<int> > combinationSum(vector<int>& candidates, int target) {
           vector< vector<int> > result = combinations(candidates, 0, candidates.size()-1, target);
           for (vector< vector<int> >::iterator it = result.begin(); it!=result.end();it++) {
-
               std::sort(it->begin(), it->end());
           }
           return result;
