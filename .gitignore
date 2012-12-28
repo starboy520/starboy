@@ -10,5 +10,6 @@
 *.exe
 a.out
 *.core
+*~
 core
 tags
