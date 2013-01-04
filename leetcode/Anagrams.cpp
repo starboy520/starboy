@@ -34,7 +34,6 @@ vector<string> anagrams(vector<string> &strs) {
 	while (low < high) {
 		int idx = split(strs, low, high);
 		if (idx == low) {
-			cout << "12323" << endl; 
 			std::swap(strs[idx], strs[high]);
 			high--;
 			low = idx;

@@ -10,7 +10,7 @@
 class Solution {
 public:
     int maxSum(TreeNode* root, int& allmax) {
-        if (!root) return 0;
+        if (root == NULL) return 0;
         int left = maxSum(root->left, allmax);
         int right = maxSum(root->right, allmax);
         int localmx = root->val;
