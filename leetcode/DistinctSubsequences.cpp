@@ -25,20 +25,27 @@ using namespace std;
 
 class Solution {
 public:
- int numDistinct(string s, string t) {
-   int t_size = t.size();
-   int s_size = s.size();
-   int result[s_size + 1];
-   for (int i = 0;  i < s_size + 1; i++)
-     result[i] = 0;
+    int numDistinct(string s, string t) {
+        int t_size = t.size();
+        int s_size = s.size();
+        int result[t_size];
+        for (int i = 0; i < t_size; i++) {
+            result[i] = 0;
+        }
 
-   for (int i = 1; i < t_size; i++) {
-     int last = result[0];
-     for (int j = 1; j < s_size; j++) {
-       if (s[j] == t[j]) {
-     }
-   }
- }
+        for (int i = 0; i < s_size; i++) {
+            for (int j = t_size-1; j>= 0; j--) {
+                if (t[j] == s[i]) {
+                    if (j == 0) result[j]++;
+                    else result[j] += result[j-1];
+                }
+                
+            }
+            
+        }
+        return result[t_size-1];
+        
+    }
 };
 // class Solution {
 //

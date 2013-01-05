@@ -13,7 +13,7 @@ public:
 double findMedianBaseCase(int med, int C[], int n) {
   if (n == 1)
     return (med+C[0])/2.0;
- 
+
   if (n % 2 == 0) {
     int a = C[n/2 - 1], b = C[n/2];
     if (med <= a)
@@ -32,7 +32,7 @@ double findMedianBaseCase(int med, int C[], int n) {
       return (b+c) / 2.0;
   }
 }
- 
+
 double findMedianBaseCase2(int med1, int med2, int C[], int n) {
   if (n % 2 == 0) {
     int a = (((n/2-2) >= 0) ? C[n/2 - 2] : INT_MIN);
@@ -58,12 +58,12 @@ double findMedianBaseCase2(int med1, int med2, int C[], int n) {
       return b;
   }
 }
- 
+
 double findMedianSingleArray(int A[], int n) {
   assert(n > 0);
   return ((n%2 == 1) ? A[n/2] : (A[n/2-1]+A[n/2])/2.0);
 }
- 
+
 double findMedianSortedArrays(int A[], int m, int B[], int n) {
   assert(m+n >= 1);
   if (m == 0)
@@ -78,7 +78,7 @@ double findMedianSortedArrays(int A[], int m, int B[], int n) {
     return findMedianBaseCase2(A[0], A[1], B, n);
   else if (n == 2)
     return findMedianBaseCase2(B[0], B[1], A, m);
- 
+
   int i = m/2, j = n/2, k;
   if (A[i] <= B[j]) {
     k = ((m%2 == 0) ? min(i-1, n-j-1) : min(i, n-j-1));
@@ -90,4 +90,5 @@ double findMedianSortedArrays(int A[], int m, int B[], int n) {
     return findMedianSortedArrays(A, m-k, B+k, n-k);
   }
 }
+
 };

@@ -24,6 +24,5 @@ public:
                 res = res->right;
             }
         }
-        //root = res;
     }
 };
