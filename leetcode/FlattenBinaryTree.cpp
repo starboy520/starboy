@@ -1,8 +1,6 @@
 class Solution {
 public:
     void flatten(TreeNode *root) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
         if(root == NULL) return;
         TreeNode* res = NULL;
         stack<TreeNode*> stk;

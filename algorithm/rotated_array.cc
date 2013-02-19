@@ -66,7 +66,6 @@ int minNumInRotatedArrya(int *a, int begin, int end) {
     }
 }
 
-
 // Another problem.
 // How to search a num in this kind of array?
 // For binary search, we need to track begin, end, mid element
