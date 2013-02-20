@@ -10,15 +10,21 @@ struct TreeNode {
 	}
 };
 
-int height(TreeNode* root) {
-    if (root == NULL)
-        return 0;
+int leftHeight(TreeNode* root) {
     int height = 0;
     while (root) {
         root = root->left;
         height++;
     }
+    return height;
+}
 
+int rightHeight(TreeNode* root) {
+    int height = 0;
+    while (root) {
+        height++;
+        root = root->right;
+    }
     return height;
 }
 
@@ -32,6 +38,23 @@ int numOfAll(int height) {
     return all;
 }
 
+int numOfNode(TreeNode* root) {
+    int h = leftHeight(root);
+    int total = 0;
+    while (h > 0 && root != NULL) {
+        if (rightHeight(root->left) == h-1) {
+            total += numOfAll(h-1)+1;
+            root = root->right;
+        } else {
+            total += numOfAll(h-2) + 1;
+            root = root->left;
+        }
+        h--;
+    }
+    return total;
+}
+
+/*
 int numOfNode(TreeNode* root) {
     int h = height(root);
 
@@ -60,6 +83,7 @@ int numOfNode(TreeNode* root) {
 
     return nums;
 }
+*/
 
 int main() {
     TreeNode* a = new TreeNode(1);

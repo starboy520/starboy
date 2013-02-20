@@ -24,3 +24,22 @@ public:
         }
     }
 };
+
+/*
+ * class Solution {
+	void flatten(TreeNode* root) {
+		if (root == NULL) return;
+		if (root->left) flatten(root->left);
+		if (root->right) flatten(root->right);
+		if (root->left == NULL) return;
+
+		TreeNode** ptn = &(root->left->right);
+		while (*ptn) 
+			ptn = &((*ptn)->right);
+		*ptn = root->right;
+
+		root->right = root->left;
+		root->left = NULL;
+	}
+}
+*/
