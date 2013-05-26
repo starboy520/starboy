@@ -57,4 +57,30 @@ public:
         return ret_head;
         
     }
+    
+    ListNode *deleteDuplicates(ListNode *head) {
+        if (head == NULL) return NULL;
+        
+        ListNode* dummy = new ListNode(INT_MAX);
+        dummy->next = head;
+        ListNode* prev = dummy;
+        ListNode* cur = dummy->next;
+        
+        while (cur) {
+            ListNode* tmp = cur;
+            ListNode* next = cur->next;
+            
+            if (next == NULL || next->val != cur->val) {
+                prev = cur;
+                cur = cur->next;
+            } else {
+                while (next != NULL && next->val == tmp->val) {
+                    next = next->next;
+                }
+                prev->next = next;
+                cur = next;
+            }
+        }
+        return dummy->next;
+    }
 };
