@@ -12,4 +12,24 @@ public:
         return head;
         
     }
+    
+    ListNode *deleteDuplicates2(ListNode *head) {
+        if (head == NULL) return NULL;
+        ListNode* dummy = new ListNode(INT_MIN);
+        dummy->next = head;
+        
+        ListNode* prev = dummy;
+        ListNode* cur = dummy->next;
+        
+        while (cur != NULL) {
+            if (cur->val == prev->val) {
+                prev->next = cur->next;
+                cur = cur->next;
+            } else {
+                prev = cur;
+                cur = cur->next;
+            }
+        }
+        return dummy->next;
+    }
 };
