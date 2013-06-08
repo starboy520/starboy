@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int jump(int a[], int n) {
+        if (n == 1) return 0;
+        int jumps = 0;
+        int cur_max = 0;
+        int i = 0;
+        while (i < n) {
+            cur_max = a[i] + i;
+            if (a[i] > 0) jumps++;
+            else return 0;
+            if (cur_max >= n-1) return jumps;
+            int tmp_max = 0;
+            for (int j = i+1; j <=cur_max; j++) {
+              if (a[j] + j > tmp_max) {
+                  i = j;
+                  tmp_max = a[j]+j;
+              }
+            }
+        }
+        return jumps;
+        
+    }
+};
