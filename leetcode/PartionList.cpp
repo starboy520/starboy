@@ -48,3 +48,36 @@ public:
         return head_before;
     }
 };
+
+
+/**
+ * 
+ * 
+class Solution {
+public:
+    ListNode *partition(ListNode *head, int x) {
+        if (head == NULL) return NULL;
+        ListNode* dummy = new ListNode(INT_MAX);
+        dummy->next = head;
+        ListNode* prev = dummy;
+        ListNode* cur = dummy;
+        while (cur->next != NULL) {
+            if (cur->next->val >= x) {
+                cur = cur->next;
+            } else {
+                ListNode* tmp = cur->next;
+                if (prev->next != tmp) {
+                    cur->next = cur->next->next;
+                    tmp->next = prev->next;
+                    prev->next = tmp;
+                } else {
+                    cur = cur->next;
+                }
+                prev = prev->next;
+
+            }
+        }
+        return dummy->next;
+        
+    }
+};
