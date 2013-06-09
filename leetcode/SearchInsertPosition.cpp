@@ -17,3 +17,25 @@ public:
         else return begin+1;
     }
 };
+
+
+class Solution {
+public:
+    int searchInsert(int a[], int n, int target) {
+        int low = 0;
+        int high = n-1;
+        while (low < high) {
+            int mid = low + (high-low+1)/2;
+            if ( a[mid] <= target) {
+                low = mid;
+            } else {
+                high = mid - 1;
+            }
+        }
+        if (a[low] == target) return low;
+        else if (target>a[low]) return low+1;
+        else return 0;
+    
+    }
+    
+};
