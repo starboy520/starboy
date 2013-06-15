@@ -1,7 +1,3 @@
-// Copyright (c) 2012 Baidu.com, Inc. All Rights Reserved
-// @author Chengjie Qi(qichengjie@baidu.com)
-// @brief 
-
 #include <iostream>
 #include <vector>
 using namespace std;
