@@ -9,59 +9,43 @@
 // Input: {2,3,-7,6,8,1, -10, 15}
 // Output: 4
 
-// Solution: 
+// Solution:
 #include <iostream>
 using namespace std;
 
-int ChangePositiveRight(int* a, int n) {
-  if (a == NULL) {
-    return -1;
-  }
-
-  int j = 0;
-  for (int i = 0; i < n; i++) {
-    if (a[i] <= 0) {
-      int temp = a[i];
-      a[i] = a[j];
-      a[j] = temp;
-      j++;
+int firstMissingPositive(int a[], int n) {
+    int idx = 0;
+    for (int i = 0; i < n; i++) {
+        if (a[i] > 0) {
+            a[idx++] = a[i];
+        }
     }
-  }
-  return j;
-}
 
-int abs(int a) {
-  if (a < 0) {
-    return -a;
-  }
+    for (int i = 0; i < idx; i++) {
+        if (a[i] < 0) {
+            int index = -a[i];
+            if (index <= idx && a[index-1] > 0) {
+                a[index-1] = -a[index-1];
+            }
+        } else if (a[i] > idx) {
 
-  return a;
-}
-
-int findMissingPositive(int* a, int n) {
-  for (int i = 0; i < n; i++) {
-    if (abs(a[i]) -1 < n && a[abs(a[i])-1] > 0) {
-        a[abs(a[i])-1] = -a[abs(a[i])-1];
+        } else {
+            int index = a[i];
+            if (a[index-1] > 0) {
+                a[index-1] = -a[index-1];
+            }
+        }
     }
-  }
 
-  for (int i = 0; i < n; i++) {
-    if (a[i] > 0) {
-      return i+1;
+    for (int i = 0; i < idx; i++) {
+        if (a[i] > 0) return i + 1;
     }
-  }
-
-  return n+1;
-}
-
-int findMissing(int* a, int n) {
-  int index = ChangePositiveRight(a, n);
-  return findMissingPositive(a+index, n-index);
+    return idx + 1;
 }
 
 int main() {
   int a[] = {0, 10, 2, -10, -20};
-  cout << findMissing(a, 5) << endl;
+  cout << firstMissingPositive(a, 5) << endl;
 }
 
 
